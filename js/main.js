@@ -3,17 +3,51 @@ var canvas;
 var ctx;
 var w;
 var h;
-var mousePos = {x:0,y:0};
+var mousePos = {x:999,y:999};
+var scale;
+var window_w;
+var canvas_w;
+var canvas_h;
+var mobile = false;
 
-window.onload = function() {
-    w = screen.width;
-	h = screen.height;
+function resizeCanvas() {
 	
 	canvas = document.getElementById('canvas');
-    canvas.width = w;
-    canvas.height = 465
+	window_w = $(window).width();
 	
+	canvas_w = window_w-2;
+	if (canvas_w < 480) {
+		canvas_w = 480;
+	}
+	canvas_h = 465;
+	
+    canvas.width = canvas_w;
+    canvas.height = canvas_h;
+
+	if (canvas_w > 1000) {
+		scale = 1;
+	} else if (canvas_w > 480) {
+		scale = canvas_w/1000;
+	} else {
+		scale = 480/1000;
+	}
+}
+
+window.onresize = function() {
+	resizeCanvas();
+}
+
+window.onload = function() {
+   
+   
+	if (/Mobile|Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+		mobile = true;
+	}
+   
+	canvas = document.getElementById('canvas');
 	ctx = canvas.getContext("2d");
+	
+	resizeCanvas();
 	
 	
 	canvas.addEventListener('mousemove', function(evt) {
@@ -30,16 +64,19 @@ window.onload = function() {
 	window.requestAnimationFrame(updateCanvas);
 }
 
+
 //Reset the visuals in the canvas
 function mouseOut() {
-	mousePos = {x:0,y:0};
+	mousePos = {x:canvas_w,y:canvas_h};
 }
+
+
 
 function initCircles() {
 	//Spell out my name, ugly but how else to do it? Use relative positioning to make it easier
 	
 	//C
-	var relPos = {x:w/2-240, y:140}
+	var relPos = {x:-240, y:-90}
 	var setCol = '#FF0000'
 
 	addCircle(30,-40,8,setCol,0.6,relPos);
@@ -55,7 +92,7 @@ function initCircles() {
 	
 	
 	//R
-	var relPos = {x:w/2-120, y:140}
+	var relPos = {x:-120, y:-90}
 	var setCol = '#FF0000'
 
 	addCircle(-30,0,8,setCol,0.6,relPos);
@@ -74,7 +111,7 @@ function initCircles() {
 	
 	
 	//E
-	var relPos = {x:w/2, y:140}
+	var relPos = {x:0, y:-90}
 
 	addCircle(-30,0,8,setCol,0.6,relPos);
 	addCircle(-30,-40,8,setCol,0.6,relPos);
@@ -91,7 +128,7 @@ function initCircles() {
 	addCircle(30,40,8,setCol,0.6,relPos);
 	
 	//E
-	var relPos = {x:w/2+120, y:140}
+	var relPos = {x:+120, y:-90}
 
 	addCircle(-30,0,8,setCol,0.6,relPos);
 	addCircle(-30,-40,8,setCol,0.6,relPos);
@@ -108,7 +145,7 @@ function initCircles() {
 	addCircle(30,40,8,setCol,0.6,relPos);
 	
 	//D
-	var relPos = {x:w/2+240, y:140}
+	var relPos = {x:+240, y:-90}
 
 	addCircle(-30,0,8,setCol,0.6,relPos);
 	addCircle(-30,-40,8,setCol,0.6,relPos);
@@ -129,7 +166,7 @@ function initCircles() {
 	
 	
 	//G
-	var relPos = {x:w/2-360, y:320}
+	var relPos = {x:-360, y:90}
 
 	addCircle(21,-30,6,setCol,0.6,relPos);
 	addCircle(4,-30,6,setCol,0.6,relPos);
@@ -145,7 +182,7 @@ function initCircles() {
 	addCircle(7,0,6,setCol,0.6,relPos);
 	
 	//A
-	var relPos = {x:w/2-270, y:320}
+	var relPos = {x:-270, y:90}
 
 	addCircle(-15,0,6,setCol,0.6,relPos);
 	addCircle(-15,-15,6,setCol,0.6,relPos);
@@ -163,7 +200,7 @@ function initCircles() {
 	
 	
 	//L
-	var relPos = {x:w/2-180, y:320}
+	var relPos = {x:-180, y:90}
 
 	addCircle(-15,0,6,setCol,0.6,relPos);
 	addCircle(-15,-30,6,setCol,0.6,relPos);
@@ -175,7 +212,7 @@ function initCircles() {
 	addCircle(15,30,6,setCol,0.6,relPos);
 	
 	//L
-	var relPos = {x:w/2-90, y:320}
+	var relPos = {x:-90, y:90}
 
 	addCircle(-15,0,6,setCol,0.6,relPos);
 	addCircle(-15,-30,6,setCol,0.6,relPos);
@@ -187,7 +224,7 @@ function initCircles() {
 	addCircle(15,30,6,setCol,0.6,relPos);
 	
 	//A
-	var relPos = {x:w/2, y:320}
+	var relPos = {x:0, y:90}
 
 	addCircle(-15,0,6,setCol,0.6,relPos);
 	addCircle(-15,-15,6,setCol,0.6,relPos);
@@ -205,7 +242,7 @@ function initCircles() {
 	
 	
 	//G
-	var relPos = {x:w/2+90, y:320}
+	var relPos = {x:+90, y:90}
 
 	addCircle(21,-30,6,setCol,0.6,relPos);
 	addCircle(4,-30,6,setCol,0.6,relPos);
@@ -222,7 +259,7 @@ function initCircles() {
 	
 	
 	//L
-	var relPos = {x:w/2+180, y:320}
+	var relPos = {x:+180, y:90}
 
 	addCircle(-15,0,6,setCol,0.6,relPos);
 	addCircle(-15,-30,6,setCol,0.6,relPos);
@@ -240,7 +277,7 @@ function initCircles() {
 	
 	
 	//E
-	var relPos = {x:w/2+270, y:320}
+	var relPos = {x:+270, y:90}
 
 	addCircle(-15,0,6,setCol,0.6,relPos);
 	addCircle(-15,-30,6,setCol,0.6,relPos);
@@ -257,7 +294,7 @@ function initCircles() {
 	
 	
 	//R
-	var relPos = {x:w/2+360, y:320}
+	var relPos = {x:+360, y:90}
 
 	addCircle(-15,0,6,setCol,0.6,relPos);
 	addCircle(-15,-30,6,setCol,0.6,relPos);
@@ -286,7 +323,7 @@ function addCircle(aX,aY,r,c,a,relPos) {
 	
 	c = '#D50909';
 	a = 0.7;
-
+	
 	
 	
 	//anchor x pos, anchor y pos, radius, color, alpha, actual x pos, actual y pos, x velocity, y velocity
@@ -364,12 +401,12 @@ function updateCircles() {
 	}
 }
 	
-//Draw the new frame using the circles array
+//Draw the new frame using the circles array. Depends on the scale (which depends on the canvas width, i.e window width)
 function drawCircles() {
 	for (var i = 0; i < circles.length; i++) {
 		var c = circles[i];
 		ctx.beginPath();
-		ctx.arc(c.x,c.y,c.rad,0,2*Math.PI);
+		ctx.arc(canvas_w/2+c.x*scale,canvas_h/2+c.y*scale,c.rad*scale,0,2*Math.PI);
 		ctx.fillStyle = c.col;
 		ctx.save();
 		ctx.globalAlpha = c.alpha;
@@ -383,8 +420,44 @@ function drawCircles() {
 function getMousePos(canvas, evt) {
 	var rect = canvas.getBoundingClientRect();
 	return {
-		x: evt.clientX - rect.left,
-		y: evt.clientY - rect.top
+		x: ((evt.clientX - rect.left)-canvas_w/2)/scale,
+		y: ((evt.clientY - rect.top)-canvas_h/2)/scale
 	};
 }
 
+
+
+
+
+//MOBILE TOUCH SUPPORT
+
+canvas.addEventListener("touchstart", function (e) {
+        mousePos = getTouchPos(canvas, e);
+  var touch = e.touches[0];
+  var mouseEvent = new MouseEvent("mousedown", {
+    clientX: touch.clientX,
+    clientY: touch.clientY
+  });
+  canvas.dispatchEvent(mouseEvent);
+}, false);
+canvas.addEventListener("touchend", function (e) {
+  var mouseEvent = new MouseEvent("mouseup", {});
+  canvas.dispatchEvent(mouseEvent);
+}, false);
+canvas.addEventListener("touchmove", function (e) {
+  var touch = e.touches[0];
+  var mouseEvent = new MouseEvent("mousemove", {
+    clientX: touch.clientX,
+    clientY: touch.clientY
+  });
+  canvas.dispatchEvent(mouseEvent);
+}, false);
+
+// Get the position of a touch relative to the canvas
+function getTouchPos(canvasDom, touchEvent) {
+  var rect = canvasDom.getBoundingClientRect();
+  return {
+    x: ((touchEvent.touches[0].clientX - rect.left)-canvas_w/2)/scale,
+    y: ((touchEvent.touches[0].clientY - rect.top)-canvas_h/2)/scale
+  };
+}

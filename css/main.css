@@ -118,10 +118,10 @@ textarea {
 
 
 #intro {
-	margin-top: 15px;
+	margin-top: 30px;
 	position: relative;
 	text-align: center;
-	min-width: 680px;
+	min-width: 480px;
 }	
 
 #headshot {
@@ -129,6 +129,7 @@ textarea {
 	width: 81px;
 	height: 81px;
 	margin-left: -5px;
+	margin-bottom: 5px;
 }
 
 #intro_msg {
@@ -155,9 +156,12 @@ textarea {
 	position: relative;
 	border: 1px solid #F5F5F5;
 	top: 410px;
-    width: 1000px;
+	width: 90%;
+    max-width: 1000px;
 	margin: 0 auto;
     background:#FFFFFF;
+	min-width: 480px;
+	padding-bottom: 40px;
 	
 }
 
@@ -166,7 +170,6 @@ textarea {
 	position: relative;
 	top: 50px;
 	text-align: center;
-	
 }
 
 .project {
@@ -218,6 +221,24 @@ textarea {
 }
 
 
+#top_buttons {
+	position:fixed;
+	top: 0;
+	width: 90%;
+	min-width: 432px;
+}
+
+#git_logo {
+	position: absolute;
+	top: 16.5px;
+	right: 0px;
+}
+
+#linked_logo {
+	position: absolute;
+	top: 15px;
+	right: 100px;
+}
 
 
 
