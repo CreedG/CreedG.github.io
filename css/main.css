@@ -161,8 +161,7 @@ textarea {
 	margin: 0 auto;
     background:#FFFFFF;
 	min-width: 480px;
-	padding-bottom: 40px;
-	
+	padding-bottom: 60px;
 }
 
 
@@ -221,23 +220,74 @@ textarea {
 }
 
 
-#top_buttons {
-	position:fixed;
-	top: 0;
+
+#top_div {	
+	position:relative;
+	
 	width: 90%;
-	min-width: 432px;
+	max-width: 1000px;
+	margin: auto;
+	
 }
 
-#git_logo {
-	position: absolute;
-	top: 16.5px;
-	right: 0px;
+#top_content {
+	position:fixed;
+
+	width: 90%;
+	top: 0px;
+    max-width: 1000px;
+	margin: auto;
+	min-width: 460px;
+	padding-bottom: 40px;
+	
+
 }
 
-#linked_logo {
+
+
+
+#linkedin_link {
 	position: absolute;
-	top: 15px;
+	color: #DDDDDD;
+	font-size: 14px;
+	top: 12px;
+	right: 0;
+	
+}
+
+#linkedin_link:hover, #linkedin_link:active {
+	color: #FFFFFF;
+}
+
+#github_link {
+	position: absolute;
+	color: #DDDDDD;
+	font-size: 14px;
+	top: 12px;
 	right: 100px;
+}
+
+#github_link:hover, #github_link:active {
+	color: #FFFFFF;
+}
+
+#bottom_div {
+	position: relative;
+	width: match-parent;
+	top: 410px;
+	height: 35px;
+	background-color: #DDDDDD;
+	min-width: 480px;
+}
+
+#bottom_text {
+	position: relative;
+	text-align: center;
+	color: #888888;
+	left: 0;
+	right: 0;
+	font-size: 14px;
+	top: 9px;
 }
 
 

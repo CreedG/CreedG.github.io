@@ -10,6 +10,40 @@ var canvas_w;
 var canvas_h;
 var mobile = false;
 
+
+
+var size_num = -1;
+
+function htmlChange() {
+	
+	var overall_height = document.getElementById('center_bg').clientHeight;
+	
+	if (size_num != 0 && overall_height >= 2000) {
+        size_num = 0;
+		document.getElementById("bottom_text").innerHTML = "creedgallagher@gmail.com";
+		
+		var myElement = document.querySelector("#canvas").style.top = "-500px";
+		var myElement = document.querySelector("#center_bg").style.top = "40px";
+		var myElement = document.querySelector("#bottom_div").style.top = "40px";
+		
+			
+	} else if (size_num != 1 && overall_height < 2000) {
+        size_num = 1;
+		document.getElementById("bottom_text").innerHTML = "Made by Creed Gallagher \
+															<span style=\"display:inline-block; width: 30px\"></span> \
+															v1.03 February 22, 2017 \
+															<span style=\"display:inline-block; width: 30px\"></span> \
+															creedgallagher@gmail.com"
+		var myElement = document.querySelector("#canvas").style.top = "0px";
+		var myElement = document.querySelector("#center_bg").style.top = "410px";
+		var myElement = document.querySelector("#bottom_div").style.top = "410px";
+    }
+	
+	
+	console.log("height: "+document.getElementById('center_bg').clientHeight);
+}
+htmlChange();
+
 function resizeCanvas() {
 	
 	canvas = document.getElementById('canvas');
@@ -33,23 +67,60 @@ function resizeCanvas() {
 	} 
 }
 
-window.onresize = function() {
-	resizeCanvas();
+function registerInput() { 
+    var isMobile = window.matchMedia("only screen and (max-width: 760px)");
+
+    registerDesktop();
+	
+	console.log('mobile? '+mobile);
+}
+ 
+function registerMobile() {
+	//MOBILE TOUCH SUPPORT
+
+	canvas.addEventListener("touchstart", function (e) {
+			mousePos = getTouchPos(canvas, e);
+	  var touch = e.touches[0];
+	  var mouseEvent = new MouseEvent("mousedown", {
+		clientX: touch.clientX,
+		clientY: touch.clientY
+	  });
+	  canvas.dispatchEvent(mouseEvent);
+	}, false);
+	canvas.addEventListener("touchend", function (e) {
+	  var mouseEvent = new MouseEvent("mouseup", {});
+	  canvas.dispatchEvent(mouseEvent);
+	}, false);
+	canvas.addEventListener("touchmove", function (e) {
+	  var touch = e.touches[0];
+	  var mouseEvent = new MouseEvent("mousemove", {
+		clientX: touch.clientX,
+		clientY: touch.clientY
+	  });
+	  canvas.dispatchEvent(mouseEvent);
+	  mousePos.x = mouseEvent.x;
+	  mousePos.y = mouseEvent.y;
+	}, false);
+
+	document.body.addEventListener("touchstart", function (e) {
+	  if (e.target == canvas) {
+		e.preventDefault();
+	  }
+	}, false);
+	document.body.addEventListener("touchend", function (e) {
+	  if (e.target == canvas) {
+		e.preventDefault();
+	  }
+	}, false);
+	document.body.addEventListener("touchmove", function (e) {
+	  if (e.target == canvas) {
+		e.preventDefault();
+	  }
+	}, false);
+	
 }
 
-window.onload = function() {
-   
-   
-	if (/Mobile|Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-		mobile = true;
-	}
-   
-	canvas = document.getElementById('canvas');
-	ctx = canvas.getContext("2d");
-	
-	resizeCanvas();
-	
-	
+function registerDesktop() {
 	canvas.addEventListener('mousemove', function(evt) {
     mousePos = getMousePos(canvas, evt);
     //console.log('Mouse position: ' + mousePos.x + ',' + mousePos.y);
@@ -57,8 +128,23 @@ window.onload = function() {
 	
 	
 	canvas.addEventListener ("mouseout", mouseOut, false);
+}
+
+window.onresize = function() {
+	resizeCanvas();
+	htmlChange();
+}
+
+window.onload = function() {
+   
+   
+	canvas = document.getElementById('canvas');
+	ctx = canvas.getContext("2d");
 	
-	if (mobile) { scale = 2; }
+	resizeCanvas();
+	
+	
+	registerInput();
 	
 	initCircles();
 	updateCanvas();
@@ -76,7 +162,7 @@ function mouseOut() {
 
 
 function initCircles() {
-	//Spell out my name, ugly but how else to do it? Use relative positioning to make it easier
+	//Spell out my name. Use relative positioning to make it easier
 	
 	//C
 	var relPos = {x:-240, y:-90}
@@ -432,45 +518,7 @@ function getMousePos(canvas, evt) {
 
 
 
-//MOBILE TOUCH SUPPORT
 
-canvas.addEventListener("touchstart", function (e) {
-        mousePos = getTouchPos(canvas, e);
-  var touch = e.touches[0];
-  var mouseEvent = new MouseEvent("mousedown", {
-    clientX: touch.clientX,
-    clientY: touch.clientY
-  });
-  canvas.dispatchEvent(mouseEvent);
-}, false);
-canvas.addEventListener("touchend", function (e) {
-  var mouseEvent = new MouseEvent("mouseup", {});
-  canvas.dispatchEvent(mouseEvent);
-}, false);
-canvas.addEventListener("touchmove", function (e) {
-  var touch = e.touches[0];
-  var mouseEvent = new MouseEvent("mousemove", {
-    clientX: touch.clientX,
-    clientY: touch.clientY
-  });
-  canvas.dispatchEvent(mouseEvent);
-}, false);
-
-document.body.addEventListener("touchstart", function (e) {
-  if (e.target == canvas) {
-    e.preventDefault();
-  }
-}, false);
-document.body.addEventListener("touchend", function (e) {
-  if (e.target == canvas) {
-    e.preventDefault();
-  }
-}, false);
-document.body.addEventListener("touchmove", function (e) {
-  if (e.target == canvas) {
-    e.preventDefault();
-  }
-}, false);
 
 // Get the position of a touch relative to the canvas
 function getTouchPos(canvasDom, touchEvent) {
