@@ -121,7 +121,7 @@ textarea {
 	margin-top: 30px;
 	position: relative;
 	text-align: center;
-	min-width: 480px;
+	min-width: 400px;
 }	
 
 #headshot {
@@ -144,8 +144,8 @@ textarea {
 #line {
 	position: relative;
 	top:20px;
-	width: 400px;
-	min-width: 400px;
+	width: 350px;
+	min-width: 350px;
 	margin: 0 auto;
 	height: 0.5px;
 	background-color:#DDDDDD;
@@ -160,7 +160,7 @@ textarea {
     max-width: 1000px;
 	margin: 0 auto;
     background:#FFFFFF;
-	min-width: 480px;
+	min-width: 400px;
 	padding-bottom: 60px;
 }
 
@@ -237,7 +237,7 @@ textarea {
 	top: 0px;
     max-width: 1000px;
 	margin: auto;
-	min-width: 455px;
+	min-width: 375px;
 	padding-bottom: 40px;
 	
 
@@ -277,7 +277,7 @@ textarea {
 	top: 410px;
 	height: 35px;
 	background-color: #DDDDDD;
-	min-width: 480px;
+	min-width: 400px;
 }
 
 #bottom_text {
@@ -286,7 +286,7 @@ textarea {
 	color: #888888;
 	left: 0;
 	right: 0;
-	font-size: 14px;
+	font-size: 13px;
 	top: 9px;
 }
 
