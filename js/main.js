@@ -1,3 +1,4 @@
+//Muddy up the namespace with some globals...  since this site is a single page with only one author it can slide
 var circles = []
 var canvas;
 var ctx;
@@ -9,11 +10,9 @@ var window_w;
 var canvas_w;
 var canvas_h;
 var mobile = false;
-
-
-
 var size_num = -1;
 
+//Various considerations to make the site more responsive
 function htmlChange() {
 	
 	var overall_height = document.getElementById('center_bg').clientHeight;
@@ -44,6 +43,8 @@ function htmlChange() {
 }
 htmlChange();
 
+//Make the top canvas responsive
+
 function resizeCanvas() {
 	
 	canvas = document.getElementById('canvas');
@@ -67,6 +68,7 @@ function resizeCanvas() {
 	} 
 }
 
+//Mobile touch support
 function registerInput() { 
     var isMobile = window.matchMedia("only screen and (max-width: 760px)");
 
@@ -76,8 +78,6 @@ function registerInput() {
 }
  
 function registerMobile() {
-	//MOBILE TOUCH SUPPORT
-
 	canvas.addEventListener("touchstart", function (e) {
 			mousePos = getTouchPos(canvas, e);
 	  var touch = e.touches[0];
@@ -136,8 +136,6 @@ window.onresize = function() {
 }
 
 window.onload = function() {
-   
-   
 	canvas = document.getElementById('canvas');
 	ctx = canvas.getContext("2d");
 	
@@ -162,7 +160,7 @@ function mouseOut() {
 
 
 function initCircles() {
-	//Spell out my name. Use relative positioning to make it easier
+	//Spell out my name. Use relative positioning to make it easier.
 	
 	//C
 	var relPos = {x:-240, y:-90}
@@ -408,12 +406,8 @@ function initCircles() {
 
 function addCircle(aX,aY,r,c,a,relPos) {
 	
-	//Add some variation
-	
 	c = '#D50909';
 	a = 0.7;
-	
-	
 	
 	//anchor x pos, anchor y pos, radius, color, alpha, actual x pos, actual y pos, x velocity, y velocity
 	circles.push({	anchorX:relPos.x+aX, 
